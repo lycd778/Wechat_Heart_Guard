@@ -21,6 +21,7 @@
     "log4js":"~1.1.0",
     "request":"~2.78.0",
     "wechat-pay":"~0.2.4",
-    "moment":"~2.18.1"
+    "moment":"~2.18.1",
+    "node-schedule":"~1.2.1"
   }
 }

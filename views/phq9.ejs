@@ -11,81 +11,68 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="/css/phq9CSS.css"/>
+    <link rel="stylesheet" href="/css/weui.min.css"/>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/vue.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
 </head>
 <body>
 <div id="bg">
-    <div id="main_content">
-
+    <div id="main_content" style="display: block">
         <div v-if="seen">
             <h3 class="text-right"><strong>PHQ-9量表</strong></h3>
             <p class="lead"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHQ-9量表不仅具有对抑郁障碍辅助诊断功能，也可以用于病情严重程度的评估，并且量表包含对患者社会功能的评估，为医生选择治疗方案提供信息参考，被认为是非常良好的具有有效性、可靠性，和可行性的评估量表。</strong>
             </p>
-            <div id="button" v-on:click="start"><p><strong>开始答题</strong></p></div>
+            <div id="start_btn" v-on:click="start"><p><strong>开始答题</strong></p></div>
         </div>
 
         <div v-if="q">
-            <h4 ><strong>{{ message }}</strong></h4>
-            <ol>
-                <li v-on:click="a1"><strong>完全不会</strong></li>
-                <li v-on:click="a2"><strong>好几天</strong></li>
-                <li v-on:click="a3"><strong>一半以上的天数</strong></li>
-                <li v-on:click="a4"><strong>几乎每天</strong></li>
+            <h4 id="question">&nbsp;&nbsp;{{question}}</h4>
+            <h4 id="message">&nbsp;&nbsp;{{ message }}</h4>
+            <ol style="list-style-type: none; text-align: left;font-weight: 600">
+                <li v-on:click="a1">&nbsp;&nbsp;&nbsp;A、完全不会</li>
+                <li v-on:click="a2">&nbsp;&nbsp;&nbsp;B、好几天</li>
+                <li v-on:click="a3">&nbsp;&nbsp;&nbsp;C、一半以上的天数</li>
+                <li v-on:click="a4">&nbsp;&nbsp;&nbsp;D、几乎每天</li>
             </ol>
             <div id="button" v-on:click="back"><p><strong>上一题</strong></p></div>
         </div>
     </div>
+    <div class="js_dialog" id="iosDialog1" style="display: none;">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">消息</strong></div>
+            <div class="weui-dialog__bd">量表已填写完毕，是否发送？</div>
+            <div class="weui-dialog__ft">
+                <a href="javascript:;" id="cancel" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                <a href="javascript:;" id="confirm" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+            </div>
+        </div>
+    </div>
+    <div id="examList" style="display: none">
+    </div>
 </div>
 </body>
 <script>
-    var score=0;
-    var page=1;
-    var a=0;
+    var body = '<%- body1 %>';
+    var phq9 = JSON.parse(body);
+    var questions = phq9.questions;
+    console.log(JSON.stringify(questions.length));
+    var page = 1;
+    var a = 0;
     function switchPage(page) {
-        var msg=null;
-        switch(page)
-        {
-            case 1:
-                msg = "1、做事时提不起劲或没有兴趣";
-                break;
-            case 2:
-                msg = "2、感到心情低落、沮丧或绝望";
-                break;
-            case 3:
-                msg = "3、入睡困难、睡不安或睡眠过多";
-                break;
-            case 4:
-                msg = "4、感觉疲倦或没有活力";
-                break;
-            case 5:
-                msg = "5、食欲不振或吃太多";
-                break;
-            case 6:
-                msg = "6、觉得自己很糟---或觉得自己很失败，或让自己或家人失望";
-                break;
-            case 7:
-                msg = "7、对事物专注有困难，例如阅读报纸或看电视时";
-                break;
-            case 8:
-                msg = "8、动作或说话速度缓慢到别人已经觉察？或正好相反---烦躁或坐立不安、动来动去的情况更胜于平常";
-                break;
-            case 9:
-                msg = "9、有不如死掉或用某种方式伤害自己的念头";
-                break;
-            default:
-                break;
-        }
-        return msg;
+        return page + "、" + questions[page].question;
     }
+
 
     var bg = new Vue({
         el: '#bg',
         data: {
             seen: true,
             q: false,
-            message:"1、做事时提不起劲或没有兴趣"
+            question: questions[0].question,
+            message: 1 + "、" + questions[1].question
         },
         methods: {
             start: function () {
@@ -93,62 +80,138 @@
                 this.q = true;
             },
             a1: function () {
-                score+=0;
-                page+=1;
-                a=1;
-                console.log("page: "+page);
-                console.log("score: "+score);
-               this.message= switchPage(page);
+                questions[page].answers[0].select = "true";
+                questions[page].answers[1].select = "false";
+                questions[page].answers[2].select = "false";
+                questions[page].answers[3].select = "false";
+                console.log("answers[0].select: " + questions[page].answers[0].select);
+                if (page >= 1) {
+                    $('#button')[0].style.display = 'block';
+                }
+                if (page === (questions.length - 1)) {
+                    $('#iosDialog1').fadeIn(200);
+                } else {
+                    page += 1;
+                    console.log("page: " + page);
+                    this.message = switchPage(page);
+                }
+
             },
             a2: function () {
-                score+=1;
-                page+=1;
-                a=2;
-                console.log("page: "+page);
-                console.log("score: "+score);
-                this.message= switchPage(page);
+                questions[page].answers[0].select = "false";
+                questions[page].answers[1].select = "true";
+                questions[page].answers[2].select = "false";
+                questions[page].answers[3].select = "false";
+                console.log("answers[1].select: " + questions[page].answers[1].select);
+                if (page >= 1) {
+                    $('#button')[0].style.display = 'block';
+                }
+                if (page === (questions.length - 1)) {
+                    $('#iosDialog1').fadeIn(200);
+                } else {
+                    page += 1;
+                    console.log("page: " + page);
+                    this.message = switchPage(page);
+                }
             },
             a3: function () {
-                score+=2;
-                page+=1;
-                a=3;
-                console.log("page: "+page);
-                console.log("score: "+score);
-                this.message=switchPage(page);
+                questions[page].answers[0].select = "false";
+                questions[page].answers[1].select = "false";
+                questions[page].answers[2].select = "true";
+                questions[page].answers[3].select = "false";
+                console.log("answers[2].select: " + questions[page].answers[2].select);
+                if (page >= 1) {
+                    $('#button')[0].style.display = 'block';
+                }
+                if (page === (questions.length - 1)) {
+                    $('#iosDialog1').fadeIn(200);
+                } else {
+                    page += 1;
+                    console.log("page: " + page);
+                    this.message = switchPage(page);
+                }
             },
             a4: function () {
-                score+=3;
-                page+=1;
-                a=4;
-                console.log("page: "+page);
-                console.log("score: "+score);
-                this.message= switchPage(page);
+                questions[page].answers[0].select = "false";
+                questions[page].answers[1].select = "false";
+                questions[page].answers[2].select = "false";
+                questions[page].answers[3].select = "true";
+                console.log("answers[3].select: " + questions[page].answers[3].select);
+                if (page >= 1) {
+                    $('#button')[0].style.display = 'block';
+                }
+                if (page === (questions.length - 1)) {
+                    $('#iosDialog1').fadeIn(200);
+                } else {
+                    page += 1;
+                    console.log("page: " + page);
+                    this.message = switchPage(page);
+                }
             },
             back: function () {
-                switch(a)
-                {
-                    case 1:
-                        score-=0;
-                        break;
-                    case 2:
-                        score-=1;
-                        break;
-                    case 3:
-                        score-=2;
-                        break;
-                    case 4:
-                        score-=3;
-                        break;
-                    default:
-                        break;
+                if (page < questions.length) {
+                    page -= 1;
+                    console.log(" back page: " + page);
+                    this.message = switchPage(page);
+                    if (page <= 1) {
+                        $('#button')[0].style.display = 'none';
+                    }
                 }
-                page-=1;
-                console.log("page: "+page);
-                console.log("score: "+score);
-                this.message=switchPage(page);
+
             }
         }
 
     });
+
+    $("#confirm").click(function () {
+        phq9.questions = questions;
+       //console.log(JSON.stringify(phq9));
+        $("#iosDialog1")[0].style.display = 'none';
+        $.ajax({
+            type: 'POST',
+            url: '/uploadScale?userid=f7076924-a2ae-4727-a098-331b64ef877e&access_token=' + '<%= access_token %>',
+            data: phq9,
+            dataType: 'JSON',
+            success: function (data) {
+                if (data.status === 100) {
+                    getScale(data.result);
+                } else {
+                    alert('上传失败！');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(XMLHttpRequest.status);
+                alert(XMLHttpRequest.readyState);
+                alert(textStatus);
+            }
+        });
+    });
+    $("#cancel").click(function () {
+        $("#iosDialog1")[0].style.display = 'none';
+    });
+
+    function getScale(data) {
+                var html = "";
+                $('#main_content')[0].style.display = 'none';
+                $('#examList')[0].style.display = 'block';
+                $('#bg')[0].style.backgroundColor = '#e2e2e2';
+                $('#examList').css({ "min-height": ($(window).height() - 58) + "px" });
+                $(data).each(function () {
+//                                if (this.examName=="CSE")
+//                                    this.examName = "运动依从性自评量表(CSE)";
+//                                else if (this.examName == "EPEI")
+//                                    this.examName = "心脏康复运动效果之EPE调查表";
+                    if(this.examName=="PHQ-9量表"){
+                        html += '<div class="exam"><div class="title">' + this.examName + '</div>' + (this.score != undefined ? '<div class="score">得分:<span class="num">' + this.score + '</span></div>' : '') + '<div class="status">' + (this.status != undefined ? this.status:'')+ '</div><div class="datetime">填写时间:' + this.time.replace('T', ' ') + '</div></div>';
+                    }
+                });
+                $('#examList').html(html);
+                if (data.length == "") {
+                    $('#examList').html('<div><img class="notFound" src="/images/mobile/notfound.png"/></div>');
+                    $('#examList').addClass('WB');
+                }
+
+    }
+
 </script>
 </html>

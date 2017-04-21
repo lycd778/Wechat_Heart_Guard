@@ -24,6 +24,8 @@ var list = require('./routes/list');
 var detial = require('./routes/detial');
 var binding = require('./routes/binding');
 var updatephone = require('./routes/updatephone');
+var massSend = require('./routes/massSendNews');
+var uploadScale = require('./routes/uploadScale');
 
 var app = express();
 
@@ -84,6 +86,8 @@ app.use('/list', list);
 app.use('/detial', detial);
 app.use('/binding', binding);
 app.use('/updatephone', updatephone);
+app.use('/massSend', massSend);
+app.use('/uploadScale', uploadScale);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

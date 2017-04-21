@@ -1,0 +1,3 @@
+[2017-04-14 14:51:20.282] [INFO] logInfo - 成功启动项目
+[2017-04-14 14:51:20.286] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-14 14:51:20.286] [INFO] logInfo - You can find logs-files in the log-dir

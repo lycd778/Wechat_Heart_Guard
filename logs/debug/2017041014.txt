@@ -1,0 +1,18 @@
+[2017-04-10 14:53:45.747] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:53:45.750] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:53:45.750] [INFO] logInfo - You can find logs-files in the log-dir
+[2017-04-10 14:56:56.189] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:56:56.193] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:56:56.193] [INFO] logInfo - You can find logs-files in the log-dir
+[2017-04-10 14:59:05.406] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:59:05.409] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:59:05.409] [INFO] logInfo - You can find logs-files in the log-dir
+[2017-04-10 14:59:06.465] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:59:06.469] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:59:06.469] [INFO] logInfo - You can find logs-files in the log-dir
+[2017-04-10 14:59:14.006] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:59:14.009] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:59:14.010] [INFO] logInfo - You can find logs-files in the log-dir
+[2017-04-10 14:59:16.946] [INFO] logInfo - 成功启动项目
+[2017-04-10 14:59:16.949] [DEBUG] logInfo - We Write Logs with log4js
+[2017-04-10 14:59:16.949] [INFO] logInfo - You can find logs-files in the log-dir
