@@ -10,7 +10,18 @@ function out(i) {
         }
     }
 }
-
+var sex=null;
+function myFun(bol) {
+    if (bol) {
+        sex=bol;
+        $("#male").attr("src","/imgs/male_icon_pressed.png");
+        $("#female").attr("src","/imgs/female_icon_normal.png");
+    } else {
+        sex=bol;
+        $("#male").attr("src","/imgs/male_icon_normal.png");
+        $("#female").attr("src","/imgs/female_icon_pressed.png");
+    }
+}
 $(document).ready(function () {
     $("button").click(function () {
         var telephone = document.getElementById("telephone").value;
@@ -45,6 +56,7 @@ $(document).ready(function () {
                                     telephone: $("#telephone").val(),
                                     openid: openid,
                                     password: $("#password").val(),
+                                    gender: sex,
                                     birthday: $("#birthday").val()
                                 },
                                 function (data) {
@@ -70,6 +82,7 @@ $(document).ready(function () {
                                     telephone: $("#telephone").val(),
                                     openid: openid,
                                     password: $("#password").val(),
+                                    gender: sex,
                                     birthday: $("#birthday").val()
                                 },
                                 function (data) {

@@ -17,73 +17,138 @@
 </head>
 <body>
 <div id="bg">
-    <div id="main_content" v-if="seen">
-        <div>
+    <div id="main_content">
+
+        <div v-if="seen">
             <h3 class="text-right"><strong>PHQ-9量表</strong></h3>
             <p class="lead"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHQ-9量表不仅具有对抑郁障碍辅助诊断功能，也可以用于病情严重程度的评估，并且量表包含对患者社会功能的评估，为医生选择治疗方案提供信息参考，被认为是非常良好的具有有效性、可靠性，和可行性的评估量表。</strong>
             </p>
             <div id="button" v-on:click="start"><p><strong>开始答题</strong></p></div>
         </div>
-        <div id="app-4">
+
+        <div v-if="q">
+            <h4 ><strong>{{ message }}</strong></h4>
             <ol>
-                <li v-for="todo in todos">
-                    {{ todo.text }}
-                </li>
+                <li v-on:click="a1"><strong>完全不会</strong></li>
+                <li v-on:click="a2"><strong>好几天</strong></li>
+                <li v-on:click="a3"><strong>一半以上的天数</strong></li>
+                <li v-on:click="a4"><strong>几乎每天</strong></li>
             </ol>
-        </div>
-        <div id="app-5">
-            <p>{{ message }}</p>
-            <button v-on:click="reverseMessage">逆转消息</button>
+            <div id="button" v-on:click="back"><p><strong>上一题</strong></p></div>
         </div>
     </div>
 </div>
 </body>
 <script>
+    var score=0;
+    var page=1;
+    var a=0;
+    function switchPage(page) {
+        var msg=null;
+        switch(page)
+        {
+            case 1:
+                msg = "1、做事时提不起劲或没有兴趣";
+                break;
+            case 2:
+                msg = "2、感到心情低落、沮丧或绝望";
+                break;
+            case 3:
+                msg = "3、入睡困难、睡不安或睡眠过多";
+                break;
+            case 4:
+                msg = "4、感觉疲倦或没有活力";
+                break;
+            case 5:
+                msg = "5、食欲不振或吃太多";
+                break;
+            case 6:
+                msg = "6、觉得自己很糟---或觉得自己很失败，或让自己或家人失望";
+                break;
+            case 7:
+                msg = "7、对事物专注有困难，例如阅读报纸或看电视时";
+                break;
+            case 8:
+                msg = "8、动作或说话速度缓慢到别人已经觉察？或正好相反---烦躁或坐立不安、动来动去的情况更胜于平常";
+                break;
+            case 9:
+                msg = "9、有不如死掉或用某种方式伤害自己的念头";
+                break;
+            default:
+                break;
+        }
+        return msg;
+    }
+
     var bg = new Vue({
         el: '#bg',
         data: {
-            seen: true
-        }
-    });
-    var button = new Vue({
-        el: '#button',
-        data: {
-            seen: true
+            seen: true,
+            q: false,
+            message:"1、做事时提不起劲或没有兴趣"
         },
         methods: {
             start: function () {
-                bg.seen = false;
-                this.todos = [
-                    {text: ' JavaScript'},
-                    {text: ' Vue'},
-                    {text: ' 牛项目'}
-                ]
+                this.seen = false;
+                this.q = true;
+            },
+            a1: function () {
+                score+=0;
+                page+=1;
+                a=1;
+                console.log("page: "+page);
+                console.log("score: "+score);
+               this.message= switchPage(page);
+            },
+            a2: function () {
+                score+=1;
+                page+=1;
+                a=2;
+                console.log("page: "+page);
+                console.log("score: "+score);
+                this.message= switchPage(page);
+            },
+            a3: function () {
+                score+=2;
+                page+=1;
+                a=3;
+                console.log("page: "+page);
+                console.log("score: "+score);
+                this.message=switchPage(page);
+            },
+            a4: function () {
+                score+=3;
+                page+=1;
+                a=4;
+                console.log("page: "+page);
+                console.log("score: "+score);
+                this.message= switchPage(page);
+            },
+            back: function () {
+                switch(a)
+                {
+                    case 1:
+                        score-=0;
+                        break;
+                    case 2:
+                        score-=1;
+                        break;
+                    case 3:
+                        score-=2;
+                        break;
+                    case 4:
+                        score-=3;
+                        break;
+                    default:
+                        break;
+                }
+                page-=1;
+                console.log("page: "+page);
+                console.log("score: "+score);
+                this.message=switchPage(page);
             }
         }
 
-    });
-    var app4 = new Vue({
-        el: '#app-4',
-        data: {
-            todos: [
-                { text: '学习 JavaScript' },
-                { text: '学习 Vue' },
-                { text: '整个牛项目' }
-            ]
-        }
-    });
-    var app5 = new Vue({
-        el: '#app-5',
-        data: {
-            message: 'Hello Vue.js!'
-        },
-        methods: {
-            reverseMessage: function () {
-                bg.seen = false;
-                console.log("reverseMessage has been done.")
-                this.message = this.message.split('').reverse().join('')
-            }
-        }
     });
 </script>
 </html>

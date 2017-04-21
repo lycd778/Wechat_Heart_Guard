@@ -1,0 +1,38 @@
+html{font-size: 62.5%;}
+#header{
+    width: 100%;
+}
+.list-group{
+    padding: 2rem;
+    font: 1.4rem "Lucida Grande", Helvetica, Arial, sans-serif;
+    box-shadow: none;
+}
+.list-group-item {
+    margin-bottom: 0.2rem;
+    border-radius:0.8rem;
+}
+
+hr{
+    height:0.1rem;
+    border:none;
+    border-top:0.1rem ridge #000000;
+}
+.arrDown{
+    font-weight:bold;
+    color: #e10600;
+}
+.arrUp{
+    font-weight:bold;
+    color: #00ff18;
+}
+div.col-xs-7{
+    padding-left: 0;
+    padding-right: 0;
+    /*overflow:hidden;*/
+    /*text-overflow:ellipsis;*/
+    /*white-space:nowrap;*/
+}
+div.col-xs-5{
+    padding-left: 0;
+    padding-right: 0;
+}

@@ -13,10 +13,10 @@ var menuResponse = require('../wechat/menuResponse.js');
 
 //微信
 var config = {
-    token: 'xiao_weixin_test',
-    appid: 'wxefdad35532e3e77c',
-    appsecret: '6cbeefd9d76f33c40a56807324cbf6d7',
-    encodingAESKey: ''
+    token: 'HeartGuard',
+    appid: 'wxfb3801993da030d8',
+    appsecret: '876c2adcaf2acba2a042121f0925b137',
+    encodingAESKey: 'MO6S0KKt3bvuhZBnLshFDmkLEXNxFjVCM0U6NP5Z3g3'
 };
 //连接数据库
 var db = mysql.createConnection({
@@ -32,7 +32,7 @@ db.connect();
 var client = new OAuth(config.appid, config.appsecret);
 //初始化wechat-api模块
 var api = new wechatAPI(config.appid, config.appsecret, function (callback) {
-    var sql = 'SELECT * FROM accesstoken WHERE appid = "wxefdad35532e3e77c"';
+    var sql = 'SELECT * FROM accesstoken WHERE appid = "wxfb3801993da030d8"';
     db.query(sql, function (err, result) {
         if (err) {
             return callback(err);
@@ -41,7 +41,7 @@ var api = new wechatAPI(config.appid, config.appsecret, function (callback) {
         return callback(null, result[0].access_token);
     });
 }, function (token, callback) {
-    var sql = 'UPDATE accesstoken SET access_token = "' + token.accessToken + '" where appid = "wxefdad35532e3e77c"';
+    var sql = 'UPDATE accesstoken SET access_token = "' + token.accessToken + '" where appid = "wxfb3801993da030d8"';
     //var fields = [token.access_token, token.expires_in, token.refresh_token, token.openid, token.scope, token.create_at];
     console.log("token: " + JSON.stringify(token));
     db.query(sql, function (err, result) {
@@ -56,7 +56,7 @@ api.createMenu(menu, function (err, result) {
     if (err) {
         console.log('error: ', +err);
     }
-    console.log('create menu success' + JSON.stringify(result));
+    console.log('创建菜单成功!');
 });
 
 router.use(express.query());
@@ -75,7 +75,7 @@ router.use('/', wechat(config, function (req, res, next) {
                     console.log(err);
                 console.log("query_result: "+result.length);
                 if (result.length === 0) {
-                    var iSql = 'INSERT INTO weixinuser VALUES("' +userInfo.openid + '","' + userInfo.nickname + '","' + userInfo.sex + '","' + userInfo.province + '","' + userInfo.city + '", "' + userInfo.country + '","","","","","","")';
+                    var iSql = 'INSERT INTO weixinuser VALUES("' +userInfo.openid + '","' + userInfo.nickname + '","' + userInfo.sex + '","' + userInfo.province + '","' + userInfo.city + '", "' + userInfo.country + '","","","","","","",0,"")';
                     db.query(iSql,function (err, result) {
                         if (err) console.log(err);
                         console.log("createUserInfo: "+JSON.stringify(result));

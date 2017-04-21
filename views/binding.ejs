@@ -30,21 +30,19 @@
         <input id="openid" type="text" name="openid" value=<%=openid%>/>
 
         <input id="password" type="text" name="password" value="123456"/>
-        性别：
-        <div class="radio radio-info radio-inline" style="margin-top: 0px">
-            <input type="radio" id="inlineRadio1" value=true name="gender" checked>
-            <label for="inlineRadio1"> 男 </label>
-        </div>
-        <div class="radio radio-info radio-inline">
-            <input type="radio" id="inlineRadio2" value=false name="gender">
-            <label for="inlineRadio2"> 女</label>
+
+        <div  style="margin-top: 0px">
+            性别：
+            <img id="male" src="/imgs/male_icon_normal.png" onclick="myFun(true)">&nbsp;&nbsp;男&nbsp;&nbsp;
+            <img id="female" src="/imgs/female_icon_normal.png" onclick="myFun(false)">&nbsp;&nbsp;女
         </div>
         </br>
         生日：
-        <input id="birthday" type="date" name="birthday" value="2016-06-01">
+        <input id="birthday" type="date" name="birthday" value="1990-01-01">
         <button id="sub" class="btn btn-lg  btn-primary btn-block" type="button" style="margin-top: 10px">绑定</button>
     </form>
 
 </div>
+
 </body>
 </html>

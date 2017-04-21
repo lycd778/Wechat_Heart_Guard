@@ -7,10 +7,10 @@ var request = require('request');
 var OAuth = require('wechat-oauth');
 //微信
 var config = {
-    token: 'xiao_weixin_test',
-    appid: 'wxefdad35532e3e77c',
-    appsecret: '6cbeefd9d76f33c40a56807324cbf6d7',
-    encodingAESKey: ''
+    token: 'HeartGuard',
+    appid: 'wxfb3801993da030d8',
+    appsecret: '876c2adcaf2acba2a042121f0925b137',
+    encodingAESKey: 'MO6S0KKt3bvuhZBnLshFDmkLEXNxFjVCM0U6NP5Z3g3'
 };
 //初始化wechat-oauth模块
 var client = new OAuth(config.appid, config.appsecret);

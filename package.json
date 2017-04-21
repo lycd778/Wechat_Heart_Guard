@@ -19,6 +19,8 @@
     "wechat-oauth":"~1.2.1",
     "mysql":"~2.12.0",
     "log4js":"~1.1.0",
-    "request":"~2.78.0"
+    "request":"~2.78.0",
+    "wechat-pay":"~0.2.4",
+    "moment":"~2.18.1"
   }
 }

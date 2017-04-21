@@ -8,11 +8,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var oauth=require('./routes/oauth');
 var index=require('./routes/index');
-var jssdkTest=require('./routes/jssdkTest');
+var pay=require('./routes/pay');
+var afterPay=require('./routes/afterPay');
 var jssdkCheck=require('./routes/jssdkCheck');
 var phq9=require('./routes/phq9');
 var plan=require('./routes/homePlan');
+var planDetial=require('./routes/planDetial');
+var createMenu=require('./routes/createMenu');
+
 
 var wechat=require('./routes/wechat');
 var list = require('./routes/list');
@@ -31,7 +36,7 @@ log4js.configure({
     },
     {
       "type": "dateFile",
-      "filename": "F:/WEBStormWorkspace/MyReport/logs/",
+      "filename": "E:/Wechat_Heart_Guard/logs/",
       "pattern": "debug/yyyyMMddhh.txt",
       "absolute": true,
       "alwaysIncludePattern": true,
@@ -63,10 +68,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/createMenu',createMenu);
 app.use('/',index);
-app.use('/jssdkTest',jssdkTest);
+app.use('/MP_verify_Zxh1jEggXVhuR0W2.txt',index);
+app.use('/oauth',oauth);
+app.use('/pay',pay);
+app.use('/afterPay',afterPay);
 app.use('/phq9',phq9);
 app.use('/plan',plan);
+app.use('/planDetial',planDetial);
 app.use('/jssdkCheck',jssdkCheck);
 app.use('/wechat',wechat);
 app.use('/list', list);

@@ -12,7 +12,7 @@ body{
     /*background-size:100% 100%;*/
 	margin:0 auto;
 	position:absolute;
-    padding: 50px;
+    padding: 20px 50px 50px 50px;
 	/*top:50%;*/
 	/*left:50%;*/
 	/*margin-top:-239px;*/
@@ -34,7 +34,7 @@ body{
 }
 .form-signin {
   max-width: 330px;
-  padding: 30px 15px 15px 15px;
+  padding: 0px 15px 15px 15px;
   margin: 0 auto;
 }
 .form-signin .checkbox {
@@ -85,4 +85,12 @@ body{
 #telText{
     color: #c90000;
     text-align: center;
+}
+#male{
+    width: 40px;
+    height:40px ;
+}
+#female{
+    width: 40px;
+    height:40px ;
 }
