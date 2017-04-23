@@ -169,7 +169,7 @@
         $("#iosDialog1")[0].style.display = 'none';
         $.ajax({
             type: 'POST',
-            url: '/uploadScale?userid=f7076924-a2ae-4727-a098-331b64ef877e&access_token=' + '<%= access_token %>',
+            url: '/uploadScale?userid='+'<%= userid %>'+'&access_token=' + '<%= access_token %>',
             data: phq9,
             dataType: 'JSON',
             success: function (data) {

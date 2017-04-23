@@ -20,7 +20,7 @@ var client = new OAuth(config.appid, config.appsecret);
 
 router.get('/', function (req, res, next) {
     var code = req.query.code;
-    client.getAccessToken(code, function (err, result) {
+        client.getAccessToken(code, function (err, result) {
         var openid = result.data.openid;
         console.log("listOpenid: " +openid);
         //var openid='\'oPPfSww-UoP3AKLQ43-d07CmyrVU\'';
