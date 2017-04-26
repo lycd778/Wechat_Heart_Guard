@@ -46,7 +46,7 @@
         {
           "type": "view",
           "name": "我的报告",
-          "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb3801993da030d8&redirect_uri=http%3A%2F%2Fheartguardwx.xzkf365.com%2Fpay&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
+          "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb3801993da030d8&redirect_uri=http%3A%2F%2Fheartguardwx.xzkf365.com%2Flist&response_type=code&scope=snsapi_base&state=123#wechat_redirect"
         }
       ]
     },

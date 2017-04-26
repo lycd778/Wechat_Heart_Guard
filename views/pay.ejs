@@ -63,7 +63,9 @@
                     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb3801993da030d8&redirect_uri=http%3A%2F%2Fheartguardwx.xzkf365.com%2Flist&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
                     <% }else if(payType==2){ %>
                     window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfb3801993da030d8&redirect_uri=http%3A%2F%2Fheartguardwx.xzkf365.com%2Fplan&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
-                    <% } %>
+                    <% }else if(payType==3){  %>
+                    WeixinJSBridge.call('closeWindow');
+                    <% }%>
                 } else {
                     alert("支付失败，请重试");
                 }

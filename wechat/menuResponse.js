@@ -52,7 +52,7 @@ function menuResponse(res, message,api,db) {
         ]);
     }
     else if (message.EventKey === 'xapp') {
-        res.reply("<a href=\"http://app.qq.com/#id=detail&appid=1102255388\">下载心脏卫士APP</a>");
+        res.reply("<a href=\"http://shouji.baidu.com/soft/item?docid=7992036&from=landing&f=search_app_%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB%40list_1_title%401%40search_sug_app\">心脏卫士安卓</a> \r\n <a href=\"https://itunes.apple.com/cn/app/%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB/id1198463508?mt=8\">心脏卫士IOS</a>​​");
     }
     else if (message.EventKey === 'jjjh') {
         res.reply("居家计划开发中");

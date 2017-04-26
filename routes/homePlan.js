@@ -49,7 +49,12 @@ router.use('/', function (req, res, next) {
     //获取票券
     client.getAccessToken(code, function (err, result) {
         //获取openid
-        var openid = result.data.openid;
+        var openid = '';
+        try{
+            openid = result.data.openid;
+        }catch(e){
+            console.log("getOpenidErr: " + e);
+        }
         console.log("planOpenid: " + openid);
         var sql = 'SELECT * FROM weixinuser WHERE openid = "' + openid + '"';
         db.query(sql, function (err, result) {
@@ -83,29 +88,9 @@ router.use('/', function (req, res, next) {
                             if (result[0].isPay === 0) {
                                 wechatPay(openid, res);
                             } else {
-                                //判断是支付否过期
-                                var now= moment().format('x');
-                                var sql = 'SELECT * FROM weixinuser WHERE openid = "' + openid + '"';
-                                db.query(sql, function (err, result) {
-                                    if (err) {
-                                        return callback(err);
-                                    }
-                                    console.log("nowDate: " + now);
-                                    console.log("dueDate: " + result[0].dueDate);
-                                    var re = result[0].dueDate - now;
-                                    console.log("payTime: " + re);
-                                    if (re > 0) {
-                                        res.render('homePlan', {title: '居家计划', list: list, userid: userid});
-                                    } else {
-                                        wechatPay(openid, res);
-                                    }
-                                });
-
+                                res.render('homePlan', {title: '居家计划', list: list, userid: userid});
                             }
-
-
                         }
-
                     } else if (!error && response.statusCode == 500) {
                         res.render('error', {
                             message: '需要先绑定手机才能查看"居家计划"',
@@ -136,9 +121,9 @@ function wechatPay(openid, res) {
     payment.getBrandWCPayRequestParams(order, function (err, payargs) {
         var payType = 2;//类型是实验室报告
 
-        var starttime= moment().format('YYYY-MM-DD');
-        var endtime= moment().add(3,'M').format('YYYY-MM-DD');
-        var validityTime=starttime+"至"+endtime;
+        var starttime = moment().format('YYYY-MM-DD');
+        var endtime = moment().add(3, 'M').format('YYYY-MM-DD');
+        var validityTime = starttime + "至" + endtime;
 
         if (err) {
             console.log("err: " + err);
@@ -153,7 +138,7 @@ function wechatPay(openid, res) {
             signType: payargs.signType,
             paySign: payargs.paySign,
             payType: payType,
-            validityTime:validityTime
+            validityTime: validityTime
             // body:body,
             // total:total,
             // num:num,
@@ -165,10 +150,10 @@ function wechatPay(openid, res) {
 
 function todayList(orlist) {
     var list = new Array();
-    var date= moment(new Date()).format('YYYY-MM-DD');
+    var date = moment(new Date()).format('YYYY-MM-DD');
     for (x in orlist) {
-        if (orlist[x].getday ===date) {
-           list.push(orlist[x]);
+        if (orlist[x].getday === date) {
+            list.push(orlist[x]);
         }
     }
     return list;

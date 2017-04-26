@@ -72,18 +72,7 @@ function autoResponse(res, message) {
             }
         ]);
     }
-    else if (message.Content === '3' || message.Content === '会议' || message.Content === '活动' || message.Content === '商务') {
-        res.reply([
-            {
-                title: '【会议通知】第七届全国心脏康复及进展学习班 中美心脏康复联合论坛',
-                description: '',
-                picurl: 'https://mmbiz.qlogo.cn/mmbiz/WqpSdibDCBRnmSHB29BA2KsbHNdJVX0gB07RUrXjtovpsPAxicHs9U3McZwiakRmeGic6mEPrZRriaP9qp2vYibSy5OA/0?wx_fmt=jpeg',
-                url: 'http://mp.weixin.qq.com/s?__biz=MjM5OTEzMTkwOQ==&mid=404473612&idx=1&sn=5d8056f742e8d58071e21668f2ea2fab#rd'
-            }
-        ]);
-
-    }
-    else if (message.Content === '4' || message.Content === '视频') {
+    else if (message.Content === '3' || message.Content === '视频') {
         res.reply([
             {
                 title: '一部发人深省的公益小短片：人生最后十年，你如何过？',
@@ -92,6 +81,9 @@ function autoResponse(res, message) {
                 url: 'http://mp.weixin.qq.com/s?__biz=MjM5OTEzMTkwOQ==&mid=211907953&idx=1&sn=bacb71423ecdc47f93deea0aec499dc9&scene=18#rd'
             }
         ]);
+    }
+    else if (message.Content === '4' || message.Content === 'BMI' || message.Content === 'bmi') {
+        res.reply("<a href=\"http://cn.onlinebmicalculator.com/\">点击进入网页，计算BMI</a>​");
     }
     else if (message.Content === '心脏康复经历' || message.Content === '经历' || message.Content === '康复') {
         res.reply([
@@ -105,7 +97,7 @@ function autoResponse(res, message) {
     }
 
     else if (message.Content === '下载' || message.Content === '客户端' || message.Content === '软件' || message.Content === '产品' || message.Content === '安装') {
-        res.reply("<a href=\"http://shouji.baidu.com/soft/item?docid=7992036&from=landing&f=search_app_%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB%40list_1_title%401%40search_sug_app\">下载心脏卫士APP</a> \r\n <a href=\"http://shouji.baidu.com/software/item?docid=7990849&f=sug@software\">下载6分钟步行测试APP</a>​​");
+        res.reply("<a href=\"http://shouji.baidu.com/soft/item?docid=7992036&from=landing&f=search_app_%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB%40list_1_title%401%40search_sug_app\">心脏卫士安卓</a> \r\n <a href=\"https://itunes.apple.com/cn/app/%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB/id1198463508?mt=8\">心脏卫士IOS</a>​​");
     }
     else if (message.Content === '心脏卫士' || message.Content === 'APP心脏' || message.Content === '客户端心脏' || message.Content === '心脏卫士客户端' || message.Content === '客户端心脏卫士' || message.Content === 'APP卫士' || message.Content === 'APP心') {
         res.reply("<a href=\"http://shouji.baidu.com/soft/item?docid=7992036&from=landing&f=search_app_%E5%BF%83%E8%84%8F%E5%8D%AB%E5%A3%AB%40list_1_title%401%40search_sug_app\">下载心脏卫士APP</a>​​​​");
@@ -130,9 +122,6 @@ function autoResponse(res, message) {
                 url: 'http://mp.weixin.qq.com/s?__biz=MjM5OTEzMTkwOQ==&mid=209534584&idx=1&sn=3e1f4457a8a258f08193d5138d3cc907&scene=18#rd'
             }
         ]);
-    }
-    else if (message.Content === 'BMI' || message.Content === 'bmi') {
-        res.reply("<a href=\"http://cn.onlinebmicalculator.com/\">点击进入网页，计算BMI</a>​");
     }
     else if (message.Content === '推荐运动') {
         res.reply("您是属于：\r\n0、患有不同程度的心血管疾病 \r\n1、静坐少动/无日常活动或运动/体适能很差者\r\n2、体力活动极少/无运动/体适能较差者\r\n3、偶尔体力活动/无或未达到规律运动/体适能较差或稍差者\r\n4、日常体力活动/规律的中等强度或较大强度运动\r\n5、大量日常体力活动/规律的较大强度运动\r\n \r\n请回复上列选择的数字，及您在“测•指标”中的预计最大代谢当量（Mets）和最大心率(次/分)\r\n\r\n（格式：1-7-180）​");

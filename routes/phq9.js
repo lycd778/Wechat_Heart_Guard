@@ -31,7 +31,12 @@ router.use('/', function (req, res, next) {
     var code = req.query.code;
     //获取openid
     client.getAccessToken(code, function (err, result) {
-        var openid = result.data.openid;
+        var openid = '';
+        try{
+            openid = result.data.openid;
+        }catch(e){
+            console.log("getOpenidErr: " + e);
+        }
         console.log("phq9Openid: " +openid);
         //根据openid从数据库获取phone
         var sql = 'select * from weixinuser where openid = "' + openid + '"';
@@ -41,7 +46,7 @@ router.use('/', function (req, res, next) {
             }
             console.log("phq9_phone: " + JSON.stringify(result[0].phone));
             var phone=result[0].phone;
-
+            console.log("phq9phone: " +phone);
             //获取access_token
             var url = "http://heathcoudapi.xzkf365.com/api/User/PostLogin";
             request.post(url, {form: {username: 'ydka', password: 'YdKa#0125'}}, function (error, response, body) {
@@ -77,11 +82,6 @@ router.use('/', function (req, res, next) {
                             });
                         }
                     });
-
-
-
-
-
 
                 } else if (!error && response.statusCode == 500) {
                     res.render('error', {
